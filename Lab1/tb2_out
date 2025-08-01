@@ -1,0 +1,85 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1539-g2693dd32b)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "C:\iverilog\lib\ivl\system.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\va_math.vpi";
+S_0000023b440c66f0 .scope module, "tb_comparator_4bit_eq_gate" "tb_comparator_4bit_eq_gate" 2 3;
+ .timescale -9 -12;
+v0000023b440d3ea0_0 .var "A", 3 0;
+v0000023b440d3f40_0 .var "B", 3 0;
+v0000023b440d3b80_0 .net "EQ", 0 0, L_0000023b44122f50;  1 drivers
+S_0000023b440d68a0 .scope module, "uut" "comparator_4bit_eq_gate" 2 8, 3 1 0, S_0000023b440c66f0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 4 "A";
+    .port_info 1 /INPUT 4 "B";
+    .port_info 2 /OUTPUT 1 "EQ";
+L_0000023b440a3260 .functor XNOR 1, L_0000023b440d32c0, L_0000023b440d39a0, C4<0>, C4<0>;
+L_0000023b440d6a30 .functor XNOR 1, L_0000023b440d3a40, L_0000023b440d3d60, C4<0>, C4<0>;
+L_0000023b441228c0 .functor XNOR 1, L_0000023b440d3540, L_0000023b440d3e00, C4<0>, C4<0>;
+L_0000023b44122d90 .functor XNOR 1, L_0000023b440d30e0, L_0000023b440d34a0, C4<0>, C4<0>;
+L_0000023b44122f50 .functor AND 1, L_0000023b440a3260, L_0000023b440d6a30, L_0000023b441228c0, L_0000023b44122d90;
+v0000023b440a3020_0 .net "A", 3 0, v0000023b440d3ea0_0;  1 drivers
+v0000023b440a2c30_0 .net "B", 3 0, v0000023b440d3f40_0;  1 drivers
+v0000023b440c6880_0 .net "EQ", 0 0, L_0000023b44122f50;  alias, 1 drivers
+v0000023b440d3c20_0 .net *"_ivl_12", 0 0, L_0000023b440d3540;  1 drivers
+v0000023b440d3860_0 .net *"_ivl_14", 0 0, L_0000023b440d3e00;  1 drivers
+v0000023b440d3ae0_0 .net *"_ivl_17", 0 0, L_0000023b440d30e0;  1 drivers
+v0000023b440d35e0_0 .net *"_ivl_19", 0 0, L_0000023b440d34a0;  1 drivers
+v0000023b440d3fe0_0 .net *"_ivl_2", 0 0, L_0000023b440d32c0;  1 drivers
+v0000023b440d3900_0 .net *"_ivl_4", 0 0, L_0000023b440d39a0;  1 drivers
+v0000023b440d37c0_0 .net *"_ivl_7", 0 0, L_0000023b440d3a40;  1 drivers
+v0000023b440d3cc0_0 .net *"_ivl_9", 0 0, L_0000023b440d3d60;  1 drivers
+v0000023b440d3180_0 .net "xnor0", 0 0, L_0000023b440a3260;  1 drivers
+v0000023b440d3720_0 .net "xnor1", 0 0, L_0000023b440d6a30;  1 drivers
+v0000023b440d3220_0 .net "xnor2", 0 0, L_0000023b441228c0;  1 drivers
+v0000023b440d3360_0 .net "xnor3", 0 0, L_0000023b44122d90;  1 drivers
+L_0000023b440d32c0 .part v0000023b440d3ea0_0, 0, 1;
+L_0000023b440d39a0 .part v0000023b440d3f40_0, 0, 1;
+L_0000023b440d3a40 .part v0000023b440d3ea0_0, 1, 1;
+L_0000023b440d3d60 .part v0000023b440d3f40_0, 1, 1;
+L_0000023b440d3540 .part v0000023b440d3ea0_0, 2, 1;
+L_0000023b440d3e00 .part v0000023b440d3f40_0, 2, 1;
+L_0000023b440d30e0 .part v0000023b440d3ea0_0, 3, 1;
+L_0000023b440d34a0 .part v0000023b440d3f40_0, 3, 1;
+    .scope S_0000023b440c66f0;
+T_0 ;
+    %vpi_call 2 15 "$display", "Time |    A    B    | EQ (A==B)" {0 0 0};
+    %vpi_call 2 16 "$monitor", "%4t | %b %b |    %b", $time, v0000023b440d3ea0_0, v0000023b440d3f40_0, v0000023b440d3b80_0 {0 0 0};
+    %pushi/vec4 0, 0, 4;
+    %store/vec4 v0000023b440d3ea0_0, 0, 4;
+    %pushi/vec4 0, 0, 4;
+    %store/vec4 v0000023b440d3f40_0, 0, 4;
+    %delay 10000, 0;
+    %pushi/vec4 10, 0, 4;
+    %store/vec4 v0000023b440d3ea0_0, 0, 4;
+    %pushi/vec4 10, 0, 4;
+    %store/vec4 v0000023b440d3f40_0, 0, 4;
+    %delay 10000, 0;
+    %pushi/vec4 15, 0, 4;
+    %store/vec4 v0000023b440d3ea0_0, 0, 4;
+    %pushi/vec4 0, 0, 4;
+    %store/vec4 v0000023b440d3f40_0, 0, 4;
+    %delay 10000, 0;
+    %pushi/vec4 12, 0, 4;
+    %store/vec4 v0000023b440d3ea0_0, 0, 4;
+    %pushi/vec4 12, 0, 4;
+    %store/vec4 v0000023b440d3f40_0, 0, 4;
+    %delay 10000, 0;
+    %pushi/vec4 5, 0, 4;
+    %store/vec4 v0000023b440d3ea0_0, 0, 4;
+    %pushi/vec4 6, 0, 4;
+    %store/vec4 v0000023b440d3f40_0, 0, 4;
+    %delay 10000, 0;
+    %vpi_call 2 24 "$stop" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "Q2_testbench.v";
+    "Q2.v";

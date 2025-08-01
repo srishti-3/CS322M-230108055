@@ -1,0 +1,70 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1539-g2693dd32b)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "C:\iverilog\lib\ivl\system.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\va_math.vpi";
+S_00000277f6e46a90 .scope module, "tb_comparator_1bit_gate" "tb_comparator_1bit_gate" 2 3;
+ .timescale -9 -12;
+v00000277f6e433b0_0 .var "A", 0 0;
+v00000277f6e43450_0 .var "B", 0 0;
+v00000277f6e434f0_0 .net "O1", 0 0, L_00000277f6dfbdb0;  1 drivers
+v00000277f6e441c0_0 .net "O2", 0 0, L_00000277f6e446a0;  1 drivers
+v00000277f6e43d60_0 .net "O3", 0 0, L_00000277f6e8ea60;  1 drivers
+S_00000277f6e46c20 .scope module, "uut" "comparator_1bit_gate" 2 8, 3 1 0, S_00000277f6e46a90;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "A";
+    .port_info 1 /INPUT 1 "B";
+    .port_info 2 /OUTPUT 1 "O1";
+    .port_info 3 /OUTPUT 1 "O2";
+    .port_info 4 /OUTPUT 1 "O3";
+L_00000277f6e130f0 .functor NOT 1, v00000277f6e433b0_0, C4<0>, C4<0>, C4<0>;
+L_00000277f6e132f0 .functor NOT 1, v00000277f6e43450_0, C4<0>, C4<0>, C4<0>;
+L_00000277f6dfbdb0 .functor AND 1, v00000277f6e433b0_0, L_00000277f6e132f0, C4<1>, C4<1>;
+L_00000277f6e445a0 .functor XOR 1, v00000277f6e433b0_0, v00000277f6e43450_0, C4<0>, C4<0>;
+L_00000277f6e446a0 .functor NOT 1, L_00000277f6e445a0, C4<0>, C4<0>, C4<0>;
+L_00000277f6e8ea60 .functor AND 1, L_00000277f6e130f0, v00000277f6e43450_0, C4<1>, C4<1>;
+v00000277f6e12eb0_0 .net "A", 0 0, v00000277f6e433b0_0;  1 drivers
+v00000277f6e12c30_0 .net "B", 0 0, v00000277f6e43450_0;  1 drivers
+v00000277f6dfbb30_0 .net "O1", 0 0, L_00000277f6dfbdb0;  alias, 1 drivers
+v00000277f6dfbbd0_0 .net "O2", 0 0, L_00000277f6e446a0;  alias, 1 drivers
+v00000277f6dfbc70_0 .net "O3", 0 0, L_00000277f6e8ea60;  alias, 1 drivers
+v00000277f6dfbd10_0 .net "notA", 0 0, L_00000277f6e130f0;  1 drivers
+v00000277f6e43270_0 .net "notB", 0 0, L_00000277f6e132f0;  1 drivers
+v00000277f6e43310_0 .net "xorAB", 0 0, L_00000277f6e445a0;  1 drivers
+    .scope S_00000277f6e46a90;
+T_0 ;
+    %vpi_call 2 17 "$display", "Time | A B | O1(A>B) O2(A=B) O3(A<B)" {0 0 0};
+    %vpi_call 2 18 "$monitor", "%4t | %b %b |    %b        %b        %b", $time, v00000277f6e433b0_0, v00000277f6e43450_0, v00000277f6e434f0_0, v00000277f6e441c0_0, v00000277f6e43d60_0 {0 0 0};
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000277f6e433b0_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000277f6e43450_0, 0, 1;
+    %delay 10000, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000277f6e433b0_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v00000277f6e43450_0, 0, 1;
+    %delay 10000, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v00000277f6e433b0_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v00000277f6e43450_0, 0, 1;
+    %delay 10000, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v00000277f6e433b0_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v00000277f6e43450_0, 0, 1;
+    %delay 10000, 0;
+    %vpi_call 2 25 "$stop" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "Q1_testbench.v";
+    "Q1.v";
