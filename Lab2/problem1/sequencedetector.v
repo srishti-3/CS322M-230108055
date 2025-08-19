@@ -1,42 +1,48 @@
-module seq_detector_mealy (
+module seq_detect_1101_mealy (
     input  wire clk,
-    input  wire reset,
+    input  wire reset,  
     input  wire din,
-    output reg  dout
+    output reg  y
 );
 
-
-    parameter IDLE   = 2'b00;
-    parameter S1     = 2'b01;
-    parameter S2     = 2'b10;
-    parameter S3     = 2'b11;
-
-    reg [1:0] present_state, future_state;
-
   
-    always @(posedge clk or posedge reset) begin
+    typedef enum reg [1:0] {
+        S0 = 2'b00,  
+        S1 = 2'b01,  
+        S2 = 2'b10, 
+        S3 = 2'b11
+    } state_t;
+
+    state_t present_state, next_state;
+
+
+    always @(posedge clk) begin
         if (reset)
-            present_state <= IDLE;
+            present_state <= S0;
         else
-            present_state <= future_state;
+            present_state <= next_state;
     end
 
- 
-    always @(*) begin
-        case (present_state)
-            IDLE:   future_state = (din) ? S1 : IDLE;
-            S1:     future_state = (din) ? S2 : IDLE;
-            S2:     future_state = (din) ? S2 : S3;
-            S3:     future_state = (din) ? S1 : IDLE;
-            default: future_state = IDLE;
-        endcase
-    end
 
-   
     always @(*) begin
+        y = 1'b0; 
         case (present_state)
-            S3: dout = (din) ? 1'b1 : 1'b0;  
-            default: dout = 1'b0;
+            S0: next_state = (din) ? S1 : S0;
+
+            S1: next_state = (din) ? S2 : S0;
+
+            S2: next_state = (din) ? S2 : S3;
+
+            S3: begin
+                if (din) begin
+                    next_state = S1;
+                    y = 1'b1;  
+                end else begin
+                    next_state = S0;
+                end
+            end
+
+            default: next_state = S0;
         endcase
     end
 
