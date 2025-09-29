@@ -22,5 +22,5 @@ iverilog -g2012 -o simv riscvsingle.sv
 vvp simv
 
 
-Check output. If correct, you should see:
+5.Check output. If correct, you should see:
 Simulation succeeded
