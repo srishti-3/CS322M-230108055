@@ -18,9 +18,9 @@ The testbench writes results to **memory address 100** and prints `Simulation su
 iverilog -g2012 -o simv riscvsingle.sv
 
 
-4. Run the simulation:
+3. Run the simulation:
 vvp simv
 
 
-5.Check output. If correct, you should see:
+4.Check output. If correct, you should see:
 Simulation succeeded
