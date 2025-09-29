@@ -15,12 +15,15 @@ The testbench writes results to **memory address 100** and prints `Simulation su
 ## How to Run
 1. Place `rvx10.hex` in the same folder as `riscvsingle.sv`.  
 2. Compile with Icarus Verilog:
+```bash
 iverilog -g2012 -o simv riscvsingle.sv
+```
 
 
-3. Run the simulation:
+4. Run the simulation:
+```bash
 vvp simv
+```
 
-
-4.Check output. If correct, you should see:
-Simulation succeeded
+ 5. Check output. If correct, you should see:
+ Simulation succeeded
