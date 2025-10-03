@@ -1,6 +1,6 @@
 # RVX10 Instruction Encodings
 
-This document lists the **32-bit hexadecimal encodings** for the RVX10 test program used with `riscvsingle.sv`.
+This table lists the **32-bit hexadecimal encodings** for the RVX10 test program used with `riscvsingle.sv`.
 
 | Addr  | Hex Code   | Assembly (Approx)      | Description / Notes                       |
 |-------|-----------|-----------------------|------------------------------------------|
@@ -26,15 +26,11 @@ This document lists the **32-bit hexadecimal encodings** for the RVX10 test prog
 | 0x4C  | 0221A023  | sw x2, offset(x3)     | S-type store                               |
 | 0x50  | 00210063  | beq x2, x0, offset    | B-type branch                              |
 
-## Notes
-
+### Notes
 1. **RVX10 Instructions:**  
-   Instructions labeled **RVX10 custom** correspond to your custom extension instructions as implemented in the `aludec` and `alu` modules. They extend the standard RV32I without changing the memory or pipeline structure.
-
+   Custom instructions extend standard RV32I without changing memory or pipeline structure.
 2. **Standard Instructions:**  
-   Instructions like `addi`, `add`, `beq`, `sw`, and `jal` follow standard RV32I encoding and are compatible with the base RISC-V single-cycle implementation.
-
+   `addi`, `add`, `beq`, `sw`, `jal` follow standard RV32I encoding.
 3. **Memory Mapping:**  
-   - `0x34` (sw) stores data to memory at address 100 in your testbench.
-   - The simulation is designed to succeed when **WriteData = 25** at **DataAdr = 100**.
-
+   - `0x34` (`sw`) writes to memory at address 100 in the testbench.
+   - Simulation succeeds when **WriteData = 25** at **DataAdr = 100**.
