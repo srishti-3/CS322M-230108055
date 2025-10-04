@@ -110,15 +110,15 @@ module testbench();
   
 
   always @(negedge clk) begin
-    if(MemWrite) begin
-        if(DataAdr === 100 & WriteData === 25) begin
-            $display("Simulation succeeded at time %0t", $time);
-            $stop;
-        end else begin
-            $display("Simulation Failed");
-        end
+    if (MemWrite && DataAdr === 32'd100) begin
+        if (WriteData === 32'd25)
+            $display("Simulation succeeded");
+        else
+            $display("Simulation failed");
+        $stop;
     end
 end
+
 
 endmodule
 
@@ -232,9 +232,23 @@ module aludec(input  logic       opb5,
         endcase
       2'b11: // RVX10 custom instructions
         case(funct7_2b)
-          2'b00: case(funct3) 3'b000: ALUControl=4'b0110; 3'b001: ALUControl=4'b0111; 3'b010: ALUControl=4'b1000; default: ALUControl=4'bxxxx; endcase
-          2'b01: case(funct3) 3'b000: ALUControl=4'b1001; 3'b001: ALUControl=4'b1010; 3'b010: ALUControl=4'b1011; 3'b011: ALUControl=4'b1100; default: ALUControl=4'bxxxx; endcase
-          2'b10: case(funct3) 3'b000: ALUControl=4'b1101; 3'b001: ALUControl=4'b1110; default: ALUControl=4'bxxxx; endcase
+          2'b00: case(funct3) 
+          3'b000: ALUControl=4'b0110;
+          3'b001: ALUControl=4'b0111; 
+          3'b010: ALUControl=4'b1000;
+           default: ALUControl=4'bxxxx; 
+           endcase
+          2'b01: case(funct3)
+           3'b000: ALUControl=4'b1001;
+            3'b001: ALUControl=4'b1010;
+             3'b010: ALUControl=4'b1011; 
+             3'b011: ALUControl=4'b1100; 
+             default: ALUControl=4'bxxxx; 
+             endcase
+          2'b10: case(funct3) 3'b000: ALUControl=4'b1101;
+           3'b001: ALUControl=4'b1110; 
+           default: ALUControl=4'bxxxx; 
+           endcase
           2'b11: ALUControl = 4'b1111;
           default: ALUControl = 4'bxxxx;
         endcase
@@ -336,7 +350,7 @@ module imem(input logic [31:0] a,
             output logic [31:0] rd);
     logic [31:0] RAM [63:0];
     
-    initial $readmemh("D:\\CSMinor\\Lab3\\src\\tests\\rvx10.hex", RAM);
+    initial $readmemh("../tests/rvx10.hex", RAM);
     
     assign rd = RAM[a[31:2]]; // word-aligned access
 endmodule
